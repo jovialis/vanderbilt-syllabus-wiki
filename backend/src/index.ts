@@ -137,17 +137,17 @@ import MongoStore from "connect-mongo";
                 // Create the user.
                 if (await User.exists({googleID})) {
                     // @ts-ignore
-                    req.session.user = await User.findOne({
+                    req.session.user = (await User.findOne({
                         googleID
-                    });
+                    })).toObject();
                 } else {
                     // @ts-ignore
-                    req.session.user = await User.create({
+                    req.session.user = (await User.create({
                         googleID,
                         name,
                         portrait,
                         email
-                    });
+                    })).toObject();
                 }
 
                 res.json({
@@ -238,7 +238,7 @@ import MongoStore from "connect-mongo";
                     console.log('Deleted ' + fileKey)
                     return next(new Error('Invalid Section submitted.'));
                 }
-
+                
                 // Create a Syllabus
                 const syllabus = await SyllabusModel.create({
                     _id: req.uploadID,
