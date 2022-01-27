@@ -108,7 +108,6 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
 
         setUploadRequest({
             method: 'post',
-            baseURL: process.env['NEXT_PUBLIC_BACKEND_URL'],
             url: '/upload',
             data: formData,
             headers: {"Content-Type": "multipart/form-data"}
