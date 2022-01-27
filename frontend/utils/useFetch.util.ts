@@ -3,7 +3,7 @@
  */
 
 import {useEffect, useState} from "react";
-import axios, {AxiosRequestConfig} from "axios";
+import {AxiosRequestConfig} from "axios";
 import {createAxios} from "./axios.util";
 
 export interface UseFetchUtil<T> {

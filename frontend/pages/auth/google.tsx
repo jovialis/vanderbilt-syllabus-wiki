@@ -4,7 +4,6 @@
 import {useRouter} from "next/router.js";
 import {useEffect} from "react";
 import {Center, CircularProgress, Text, VStack} from "@chakra-ui/react";
-import axios from "axios";
 import {createAxios} from "../../utils/axios.util";
 
 export default function GooglePage() {

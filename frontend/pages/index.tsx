@@ -170,12 +170,12 @@ export default function IndexPage() {
         >
             <UploadPopoverComponent section={addSyllabusSection} setSection={setAddSyllabusSection}/>
             {(!initialState && !searchLoading && pageData.length === 0) && <>
-                <VStack spacing={0}>
+                <VStack spacing={0} alignItems={"center"}>
                     <Trekking style={{
                         width: "500px",
                         maxWidth: "75%"
                     }}/>
-                    <Text color={"gray.500"}>
+                    <Text color={"gray.500"} textAlign={"center"}>
                         Welp... This is awkward. It looks like we {"don't"} have that course.
                     </Text>
                 </VStack>
@@ -267,12 +267,12 @@ export default function IndexPage() {
 
 
             {(router.isReady && initialState) && <>
-                <VStack spacing={0}>
+                <VStack spacing={0} alignItems={"center"}>
                     <Vacation style={{
                         width: "500px",
                         maxWidth: "75%"
                     }}/>
-                    <Text color={"gray.500"}>
+                    <Text color={"gray.500"}  textAlign={"center"}>
                         Get started! Try searching for a course {"you're"} interested in.
                     </Text>
                 </VStack>

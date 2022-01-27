@@ -4,12 +4,13 @@
 
 import {Avatar, Box, Button, HStack, Text} from "@chakra-ui/react";
 import Google from "../assets/google.svg";
-import axios from "axios";
 import {Dispatch, useEffect, useState} from "react";
 import {createAxios} from "../utils/axios.util";
 
 export interface ExportUser {
-    name: string, email: string, portrait: string
+    name: string,
+    email: string,
+    portrait: string
 }
 
 interface LoginOptions {
@@ -24,7 +25,7 @@ export function LoginButton(props?: ILoginButton) {
     const [loading, setLoading] = useState(true);
 
     const [loginOptions, setLoginOptions] = useState<LoginOptions | null>(null);
-    const [user, setUser] = useState<{name: string, email: string, portrait: string} | null>(null);
+    const [user, setUser] = useState<{ name: string, email: string, portrait: string } | null>(null);
 
     useEffect(() => {
         const axios = createAxios();

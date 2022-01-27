@@ -46,7 +46,7 @@ export default function modelUser(): pkg.Model<User> {
         });
 
         schema.set('toJSON', {
-            transform: function(doc, ret, options) {
+            transform: function (doc, ret, options) {
                 return {
                     name: doc.name,
                     portrait: doc.portrait,

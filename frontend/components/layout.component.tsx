@@ -4,20 +4,20 @@
 
 import {
     Box,
-    Button,
     Code,
     Container,
     Flex,
     Heading,
     HStack,
-    Link, Stack,
+    Link,
+    Stack,
     Text,
     useBreakpointValue,
     VStack
 } from "@chakra-ui/react";
-import Google from "../assets/google.svg";
 import {ExportUser, LoginButton} from "./loginButton.component";
 import {Dispatch} from "react";
+import Head from "next/head.js";
 
 export interface LayoutComponentProps {
     marginElement?: JSX.Element,
@@ -26,16 +26,25 @@ export interface LayoutComponentProps {
 }
 
 export function LayoutComponent(props: LayoutComponentProps) {
-    const footerSpacing = useBreakpointValue({base: 5, md: 10});
-
-    const stackTitle = useBreakpointValue({base: true, md: false});
-
     return <>
+        <Head>
+            <title>Syllabus Wiki: Vanderbilt</title>
+            <meta name="title" content="Syllabus Wiki: Vanderbilt University"/>
+            <meta name="description" content="Free and open source syllabus repository for Vanderbilt University"/>
+            <meta name="keywords"
+                  content="syllabus,course,vanderbilt,university,vu,course,upload,free,repository,list"/>
+            <meta name="robots" content="index, nofollow"/>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta name="language" content="English"/>
+            <meta name="author" content="Dylan Hanson (jovialis)"/>
+        </Head>
         <VStack minH={"100vh"} alignItems={"stretch"} spacing={0}>
-            <Box flexGrow={0} py={10} pt={stackTitle ? 5 : 10} bg={"orange"}>
+            <Box flexGrow={0} py={10} pt={[5, 10]} bg={"orange"}>
                 <Container maxW={"container.xl"}>
-                    <Stack spacing={stackTitle ? 3 : 0} justifyContent={"space-between"} direction={stackTitle ? ["column"]: ["row"]}>
-                        <Stack alignItems={stackTitle ? "center" : "flex-start"} direction={stackTitle ? "row" : "column"}>
+                    <Stack spacing={[6, 0]} justifyContent={"space-between"}
+                           direction={["column", "row"]}>
+                        <Stack alignItems={"flex-start"}
+                               direction={"column"}>
                             <Heading size={"lg"}>
                                 Syllabus Wiki
                             </Heading>
@@ -74,7 +83,7 @@ export function LayoutComponent(props: LayoutComponentProps) {
                                 Created with {`<3`} by Dylan Hanson
                             </Text>
                         </VStack>
-                        <HStack spacing={footerSpacing}>
+                        <HStack spacing={[5, 10]}>
                             <Link href={"https://github.com/jovialis/vanderbilt-syllabus-wiki"}>
                                 View on GitHub
                             </Link>

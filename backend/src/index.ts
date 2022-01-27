@@ -111,7 +111,7 @@ import MongoStore from "connect-mongo";
                 return next(new Error('bad query'));
             }
 
-            const code: string = <string> req.query.code;
+            const code: string = <string>req.query.code;
 
             try {
                 const token = await client.getToken(code);
