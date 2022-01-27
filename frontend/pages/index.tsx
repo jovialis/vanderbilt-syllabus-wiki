@@ -191,7 +191,7 @@ export default function IndexPage() {
                         <Thead>
                             <Tr>
                                 {showTerm && <Th isNumeric>Term</Th>}
-                                {showTitle && <Th>Course</Th>}
+                                <Th>Course</Th>
                                 <Th isNumeric={false}>Section</Th>
                                 <Th isNumeric={false}>Professor</Th>
                                 <Th isNumeric>Syllabus</Th>
@@ -201,7 +201,7 @@ export default function IndexPage() {
                             {pageData.map(t => <>
                                 <Tr>
                                     <Th color={"gray.400"} whiteSpace={"nowrap"} isNumeric={showTerm}>{t.id}</Th>
-                                    {showTitle && <Th/>}
+                                    <Th/>
                                     {showTerm && <Th/>}
                                     <Th/>
                                     <Th/>
@@ -210,7 +210,7 @@ export default function IndexPage() {
                                     {c.sections.map((s => <>
                                         <Tr>
                                             {showTerm && <Td/>}
-                                            {showTitle && <Td><Text wordBreak={"break-word"}>{c.name}</Text></Td>}
+                                            <Td><Text>{c.name}</Text></Td>
                                             <Td><Badge
                                                 whiteSpace={"nowrap"}>{s.abbreviationFull}</Badge></Td>
                                             <Td>
