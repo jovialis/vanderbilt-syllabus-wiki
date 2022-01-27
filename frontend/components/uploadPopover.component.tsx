@@ -79,6 +79,7 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
 
     // Handles the selection of a file
     function handleFile(event: ChangeEvent) {
+        // @ts-ignore
         const fileUploaded = event.target?.files[0];
         setFile(fileUploaded);
     }
@@ -114,7 +115,6 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
         });
     }
 
-    // @ts-ignore
     // @ts-ignore
     return <Modal isOpen={isOpen} onClose={close}>
         <ModalOverlay/>

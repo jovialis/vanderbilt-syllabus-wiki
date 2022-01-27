@@ -157,6 +157,7 @@ export default function IndexPage() {
      */
     const [addSyllabusSection, setAddSyllabusSection] = useState<SearchSectionWithTerm | null>(null);
 
+    // @ts-ignore
     return <LayoutComponent
         marginElement={
             <SearchbarComponent value={searchTerm} setValue={setSearchTerm} onSearch={search}/>
