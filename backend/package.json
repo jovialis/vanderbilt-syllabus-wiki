@@ -16,6 +16,7 @@
     "@vanderbilt/yes-api": "^1.0.5",
     "apollo-schema-builder": "^1.0.6",
     "aws-sdk": "^2.1063.0",
+    "connect-mongo": "^4.6.0",
     "express": "^4.17.2",
     "express-server-boilerplate": "^0.0.7",
     "express-session": "^1.17.2",

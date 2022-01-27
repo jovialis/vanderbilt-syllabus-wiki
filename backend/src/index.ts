@@ -14,6 +14,7 @@ import initDatabase from "./utils/initDatabase.js";
 import {searchSections} from "./helpers/search.helper.js";
 import {google} from "googleapis";
 import modelUser from "./models/user.model.js";
+import MongoStore from "connect-mongo";
 
 // Start the Express server
 (async function () {
@@ -35,13 +36,16 @@ import modelUser from "./models/user.model.js";
     // Express session
     server.handler(app => {
         app.use(session({
-            secret: 'tacocat',
+            secret: process.env['SESSION_SECRET'],
             resave: true,
             saveUninitialized: true,
             name: 'auth.id',
             cookie: {
-                secure: "auto"
-            }
+                secure: process.env['NODE_ENV'] === 'production'
+            },
+            store: MongoStore.create({
+                mongoUrl: process.env['MONGODB_URI']
+            })
         }));
     });
 
