@@ -2,19 +2,7 @@
  * Created by jovialis (Dylan Hanson) on 1/26/22.
  */
 
-import {
-    Box,
-    Code,
-    Container,
-    Flex,
-    Heading,
-    HStack,
-    Link,
-    Stack,
-    Text,
-    useBreakpointValue,
-    VStack
-} from "@chakra-ui/react";
+import {Box, Code, Container, Flex, Heading, HStack, Link, Stack, Text, VStack} from "@chakra-ui/react";
 import {ExportUser, LoginButton} from "./loginButton.component";
 import {Dispatch} from "react";
 import Head from "next/head.js";
@@ -34,7 +22,7 @@ export function LayoutComponent(props: LayoutComponentProps) {
             <meta name="keywords"
                   content="syllabus,course,vanderbilt,university,vu,course,upload,free,repository,list"/>
             <meta name="robots" content="index, nofollow"/>
-            <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+            <meta httpEquiv="Content-Type" content="text/html; charset=utf-8"/>
             <meta name="language" content="English"/>
             <meta name="author" content="Dylan Hanson (jovialis)"/>
         </Head>

@@ -272,7 +272,7 @@ export default function IndexPage() {
                         width: "500px",
                         maxWidth: "75%"
                     }}/>
-                    <Text color={"gray.500"}  textAlign={"center"}>
+                    <Text color={"gray.500"} textAlign={"center"}>
                         Get started! Try searching for a course {"you're"} interested in.
                     </Text>
                 </VStack>
