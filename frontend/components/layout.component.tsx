@@ -33,9 +33,16 @@ export function LayoutComponent(props: LayoutComponentProps) {
                            direction={["column", "row"]}>
                         <Stack alignItems={"flex-start"}
                                direction={"column"}>
-                            <Heading size={"lg"}>
-                                Syllabus Wiki
-                            </Heading>
+                            <Link href={'/'} sx={{
+                                "&:hover": {
+                                    textDecoration: "none"
+                                }
+                            }}>
+                                <Heading size={"lg"}>
+                                    Syllabus Wiki
+                                </Heading>
+                            </Link>
+
                             <Code variant={"outline"} colorScheme={"blackAlpha"} color={"black"}>
                                 Vanderbilt University
                             </Code>

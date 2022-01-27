@@ -97,7 +97,14 @@ import MongoStore from "connect-mongo";
                     google: auth_url
                 });    // send the Auth URL to the front end
             }
-        })
+        });
+
+        app.get('/auth/logout', (req, res, next) => {
+            req.session.user = null;
+            res.json({
+                success: true
+            })
+        });
 
         app.get('/auth/google/token', async (req, res, next) => {
             // Create a new OAuth client
