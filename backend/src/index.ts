@@ -244,7 +244,7 @@ import MongoStore from "connect-mongo";
                     _id: req.uploadID,
                     section: section._id,
                     location: fileLocation,
-                    user: req.session.user
+                    user: req.session.user._id
                 });
 
                 console.log(`Uploaded syllabus ${syllabus._id}`);
