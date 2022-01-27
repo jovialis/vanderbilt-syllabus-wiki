@@ -29,7 +29,7 @@ import MongoStore from "connect-mongo";
     server.cors({
         credentials: true,
         origin: [
-            "http://localhost:3000"
+            process.env['FRONTEND_URL']
         ]
     });
 
@@ -41,7 +41,8 @@ import MongoStore from "connect-mongo";
             saveUninitialized: true,
             name: 'auth.id',
             cookie: {
-                secure: process.env['NODE_ENV'] === 'production'
+                secure: process.env['NODE_ENV'] === 'production',
+                domain: process.env['COOKIE_DOMAIN']
             },
             store: MongoStore.create({
                 mongoUrl: process.env['MONGODB_URI']
