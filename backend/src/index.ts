@@ -253,7 +253,7 @@ import MongoStore from "connect-mongo";
     });
 
     // Start the server
-    await server.start("3001");
+    await server.start(process.env['PORT']);
     console.log('Up and running!')
 
 }());
