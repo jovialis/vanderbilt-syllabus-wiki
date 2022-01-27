@@ -1,0 +1,12 @@
+{
+  "name": "syllabus-wiki",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Dylan Hanson (jovialis)",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
