@@ -13,8 +13,12 @@ const nextConfig = {
     async rewrites() {
         return [
             {
+                source: '/api/:path*',
+                destination: process.env.NEXT_PUBLIC_BACKEND_URL + '/:path*'
+            },
+            {
                 source: '/file/:path*',
-                destination: 'https://syllabus-wiki-uploads.s3.us-east-2.amazonaws.com/public/:path*'
+                destination: process.env.S3_BUCKET + '/:path*'
             }
         ]
     }

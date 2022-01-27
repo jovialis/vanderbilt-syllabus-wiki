@@ -53,7 +53,7 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
 
     const hiddenFileInput = useRef(null);
 
-    const [file, setFile] = useState(null);
+    const [file, setFile] = useState<File | null>(null);
     const [success, setSuccess] = useState(false);
 
     // Open/close based on the section prop
@@ -114,6 +114,8 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
         });
     }
 
+    // @ts-ignore
+    // @ts-ignore
     return <Modal isOpen={isOpen} onClose={close}>
         <ModalOverlay/>
         <ModalContent>
@@ -177,6 +179,7 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
                     </> : <>
                         <Button variant={"ghost"} h={150} w={"100%"} bg={"gray.100"} colorScheme={'gray'}
                                 onClick={() => {
+                                    // @ts-ignore
                                     hiddenFileInput?.current?.click();
                                 }}>
                             <VStack spacing={2}>

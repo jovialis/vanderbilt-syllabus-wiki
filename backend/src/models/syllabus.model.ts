@@ -8,7 +8,8 @@ import {nanoid} from "nanoid";
 interface Syllabus {
     _id: string,
     section: string,
-    location: string
+    location: string,
+    user: string
 }
 
 export default function modelSyllabus(): pkg.Model<Syllabus> {
@@ -28,6 +29,12 @@ export default function modelSyllabus(): pkg.Model<Syllabus> {
             location: {
                 type: String,
                 required: true
+            },
+
+            user: {
+                type: String,
+                required: true,
+                ref: 'User'
             }
 
         }, {

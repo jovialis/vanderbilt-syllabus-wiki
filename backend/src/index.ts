@@ -12,6 +12,8 @@ import modelSection from "./models/section.model.js";
 import modelSyllabus from "./models/syllabus.model.js";
 import initDatabase from "./utils/initDatabase.js";
 import {searchSections} from "./helpers/search.helper.js";
+import {google} from "googleapis";
+import modelUser from "./models/user.model.js";
 
 // Start the Express server
 (async function () {
@@ -24,7 +26,10 @@ import {searchSections} from "./helpers/search.helper.js";
 
     // CORS for frontend
     server.cors({
-        credentials: false
+        credentials: true,
+        origin: [
+            "http://localhost:3000"
+        ]
     });
 
     // Express session
@@ -35,8 +40,7 @@ import {searchSections} from "./helpers/search.helper.js";
             saveUninitialized: true,
             name: 'auth.id',
             cookie: {
-                secure: "auto",
-                domain: '.syllabus.wiki'
+                secure: "auto"
             }
         }));
     });
@@ -53,6 +57,101 @@ import {searchSections} from "./helpers/search.helper.js";
                 return res.json({terms: results})
             }
         });
+    });
+
+    /**
+     * Handle authentication with Google
+     */
+    server.handler(app => {
+        const User = modelUser();
+
+        app.get('/auth', (req, res, next) => {
+            if (req.session.user) {
+                // Session user?
+                return res.json({
+                    user: new User(req.session.user).toJSON()
+                });
+            } else {
+                // Return a URL to login
+                // Create a new OAuth client
+                const client = new google.auth.OAuth2(
+                    process.env['GOOGLE_CLIENT_ID'],
+                    process.env['GOOGLE_CLIENT_SECRET'],
+                    process.env['AUTH_REDIRECT_URL']
+                );
+
+                // Generate an auth URL for the user with our parameters.
+                const auth_url = client.generateAuthUrl({
+                    state: "GOOGLE_LOGIN",
+                    hd: (process.env['NODE_ENV'] === 'production') ? "vanderbilt.edu" : undefined,
+                    response_type: "code",
+                    scope: "email profile openid",
+                });
+
+                return res.json({
+                    google: auth_url
+                });    // send the Auth URL to the front end
+            }
+        })
+
+        app.get('/auth/google/token', async (req, res, next) => {
+            // Create a new OAuth client
+            const client = new google.auth.OAuth2(
+                process.env['GOOGLE_CLIENT_ID'],
+                process.env['GOOGLE_CLIENT_SECRET'],
+                process.env['AUTH_REDIRECT_URL']
+            );
+
+            if (!req.query.code) {
+                return next(new Error('bad query'));
+            }
+
+            const code: string = <string> req.query.code;
+
+            try {
+                const token = await client.getToken(code);
+                client.setCredentials(token.tokens);
+
+                let oauth2Client = new google.auth.OAuth2();    // create new auth client
+                oauth2Client.setCredentials({access_token: token.tokens.access_token});    // use the new auth client with the access_token
+
+                let oauth2 = google.oauth2({
+                    auth: oauth2Client,
+                    version: 'v2'
+                });
+
+                // Extract user profile
+                let {data: profile} = await oauth2.userinfo.get();    // get user info
+                const {id: googleID, name, picture: portrait, email, hd: domain} = profile;
+
+                // Validate the domain of the user
+                if ((process.env['NODE_ENV'] === 'production') && (!domain || domain.toLowerCase() !== 'vanderbilt.edu')) {
+                    return next('bad login');
+                }
+
+                // Create the user.
+                if (await User.exists({googleID})) {
+                    // @ts-ignore
+                    req.session.user = await User.findOne({
+                        googleID
+                    });
+                } else {
+                    // @ts-ignore
+                    req.session.user = await User.create({
+                        googleID,
+                        name,
+                        portrait,
+                        email
+                    });
+                }
+
+                res.json({
+                    success: true
+                });
+            } catch (e) {
+                return next(e);
+            }
+        })
     });
 
     // File upload
@@ -99,11 +198,23 @@ import {searchSections} from "./helpers/search.helper.js";
         app.post(
             '/upload',
             [
+                (req, res, next) => {
+                    if (!req.session.user)
+                        return next(new Error('User must login'));
+                    return next();
+                },
                 upload.single('file')
             ],
             async (req, res, next) => {
                 const fileLocation: string = req.file.location;
                 const fileKey = req.file.key;
+
+                // Validate user
+                if (!req.session.user) {
+                    await deleteFile(fileKey);
+                    console.log('Deleted ' + fileKey);
+                    return next(new Error('User must login'));
+                }
 
                 // Validate Section
                 const sectionID = req.body.section;
@@ -127,7 +238,8 @@ import {searchSections} from "./helpers/search.helper.js";
                 const syllabus = await SyllabusModel.create({
                     _id: req.uploadID,
                     section: section._id,
-                    location: fileLocation
+                    location: fileLocation,
+                    user: req.session.user
                 });
 
                 console.log(`Uploaded syllabus ${syllabus._id}`);

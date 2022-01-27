@@ -31,9 +31,15 @@ import {AxiosRequestConfig} from "axios";
 import {SearchSectionTerm} from "../types/section.type";
 import Trekking from "../assets/trekking.svg";
 import Vacation from "../assets/vacation.svg";
+import {ExportUser} from "../components/loginButton.component.js";
 
 export default function IndexPage() {
     const router = useRouter();
+
+    /**
+     * Whether or not the User is logged in
+     */
+    const [user, setUser] = useState<ExportUser | null>(null);
 
     const showTitle = useBreakpointValue({base: false, md: true});
     const showTerm = useBreakpointValue({base: false, lg: true});
@@ -122,7 +128,6 @@ export default function IndexPage() {
 
         setCurSearchRequest({
             method: 'get',
-            baseURL: process.env['NEXT_PUBLIC_BACKEND_URL'],
             url: '/search',
             params: {
                 query
@@ -139,7 +144,6 @@ export default function IndexPage() {
 
         setCurPaginateRequest({
             method: 'get',
-            baseURL: process.env['NEXT_PUBLIC_BACKEND_URL'],
             url: '/search',
             params: {
                 query: lastSearchTerm,
@@ -153,9 +157,12 @@ export default function IndexPage() {
      */
     const [addSyllabusSection, setAddSyllabusSection] = useState<SearchSectionWithTerm | null>(null);
 
-    return <LayoutComponent marginElement={
-        <SearchbarComponent value={searchTerm} setValue={setSearchTerm} onSearch={search}/>
-    }>
+    return <LayoutComponent
+        marginElement={
+            <SearchbarComponent value={searchTerm} setValue={setSearchTerm} onSearch={search}/>
+        }
+        updateUser={setUser}
+    >
         <Container
             maxW={"container.xl"}
             my={5}
@@ -168,7 +175,7 @@ export default function IndexPage() {
                         maxWidth: "75%"
                     }}/>
                     <Text size={"md"} color={"gray.500"}>
-                        Welp... This is awkward. It looks like we don't have that course.
+                        Welp... This is awkward. It looks like we {"don't"} have that course.
                     </Text>
                 </VStack>
             </>}
@@ -217,18 +224,27 @@ export default function IndexPage() {
                                                 <ExternalLinkIcon ml={2}/>
                                             </Link>
                                         </> : <>
-                                            <Button
-                                                size={"xs"}
-                                                leftIcon={<AttachmentIcon/>}
-                                                onClick={() => {
-                                                    setAddSyllabusSection({
-                                                        ...s,
-                                                        term: t.id
-                                                    });
-                                                }}
-                                            >
-                                                {showTitle ? 'Upload Syllabus' : 'Upload'}
-                                            </Button>
+                                            {user ? <>
+                                                <Button
+                                                    size={"xs"}
+                                                    leftIcon={<AttachmentIcon/>}
+                                                    onClick={() => {
+                                                        setAddSyllabusSection({
+                                                            ...s,
+                                                            term: t.id
+                                                        });
+                                                    }}
+                                                >
+                                                    {showTitle ? 'Upload Syllabus' : 'Upload'}
+                                                </Button>
+                                            </> : <>
+                                                <Badge
+                                                    size={"xs"}
+                                                    leftIcon={<AttachmentIcon/>}
+                                                >
+                                                    {showTitle ? 'Not Available' : 'None'}
+                                                </Badge>
+                                            </>}
                                         </>}</Td>
                                     </Tr>
                                 </>))}
@@ -256,7 +272,7 @@ export default function IndexPage() {
                         maxWidth: "75%"
                     }}/>
                     <Text size={"md"} color={"gray.500"}>
-                        Get started! Try searching for a course you're interested in.
+                        Get started! Try searching for a course {"you're"} interested in.
                     </Text>
                 </VStack>
             </>}

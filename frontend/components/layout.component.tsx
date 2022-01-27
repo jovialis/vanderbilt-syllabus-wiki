@@ -16,10 +16,13 @@ import {
     VStack
 } from "@chakra-ui/react";
 import Google from "../assets/google.svg";
+import {ExportUser, LoginButton} from "./loginButton.component";
+import {Dispatch} from "react";
 
 export interface LayoutComponentProps {
     marginElement?: JSX.Element,
-    children: JSX.Element
+    children: JSX.Element,
+    updateUser: Dispatch<ExportUser | null>
 }
 
 export function LayoutComponent(props: LayoutComponentProps) {
@@ -31,30 +34,15 @@ export function LayoutComponent(props: LayoutComponentProps) {
                 <Container maxW={"container.xl"}>
                     <HStack justifyContent={"space-between"}>
                         <VStack alignItems={"flex-start"}>
-                            <Link href={'/'} textDecoration={"none"} outline={"none"}>
-                                <Heading size={"lg"}>
-                                    Syllabus Wiki
-                                </Heading>
-                            </Link>
+                            <Heading size={"lg"}>
+                                Syllabus Wiki
+                            </Heading>
                             <Code variant={"outline"} colorScheme={"blackAlpha"} color={"black"}>
                                 Vanderbilt University
                             </Code>
                         </VStack>
                         <HStack>
-                            <Button className={'login_button'} variant={"outline"} color={"black"} borderColor={"black"}
-                                    sx={{
-                                        "&:not(:hover) path": {
-                                            fill: "black"
-                                        },
-                                        "& path": {
-                                            transition: "0.3s fill"
-                                        }
-                                    }}>
-                                <Box mr={2}>
-                                    <Google/>
-                                </Box>
-                                Login with VU Mail
-                            </Button>
+                            <LoginButton updateUser={props.updateUser}/>
                         </HStack>
                     </HStack>
                 </Container>
@@ -85,11 +73,8 @@ export function LayoutComponent(props: LayoutComponentProps) {
                             </Text>
                         </VStack>
                         <HStack spacing={footerSpacing}>
-                            <Link href={"https://github.com/jovialis?tab=repositories"}>
-                                GitHub
-                            </Link>
-                            <Link>
-                                Powered by Vercel
+                            <Link href={"https://github.com/jovialis/vanderbilt-syllabus-wiki"}>
+                                View on GitHub
                             </Link>
                         </HStack>
                     </HStack>

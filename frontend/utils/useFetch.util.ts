@@ -4,6 +4,7 @@
 
 import {useEffect, useState} from "react";
 import axios, {AxiosRequestConfig} from "axios";
+import {createAxios} from "./axios.util";
 
 export interface UseFetchUtil<T> {
     onData?: (data: T) => void,
@@ -28,6 +29,7 @@ export function useFetch<T>(request?: AxiosRequestConfig, utils?: UseFetchUtil<T
         setError(null);
         (async () => {
             try {
+                const axios = createAxios();
                 const response = await axios(request);
 
                 // Trigger handler
