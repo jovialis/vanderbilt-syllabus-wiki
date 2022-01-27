@@ -184,7 +184,7 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
                                 }}>
                             <VStack spacing={2}>
                                 <AttachmentIcon h={30} w={30} color={"gray.500"}/>
-                                <Text size={"sm"} color={"gray.500"}>
+                                <Text color={"gray.500"}>
                                     Select PDF
                                 </Text>
                             </VStack>

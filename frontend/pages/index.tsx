@@ -175,7 +175,7 @@ export default function IndexPage() {
                         width: "500px",
                         maxWidth: "75%"
                     }}/>
-                    <Text size={"md"} color={"gray.500"}>
+                    <Text color={"gray.500"}>
                         Welp... This is awkward. It looks like we {"don't"} have that course.
                     </Text>
                 </VStack>
@@ -272,7 +272,7 @@ export default function IndexPage() {
                         width: "500px",
                         maxWidth: "75%"
                     }}/>
-                    <Text size={"md"} color={"gray.500"}>
+                    <Text color={"gray.500"}>
                         Get started! Try searching for a course {"you're"} interested in.
                     </Text>
                 </VStack>
