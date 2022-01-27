@@ -114,7 +114,7 @@ export function LoginButton(props?: ILoginButton) {
                 // borderColor={"black"}
             >
                 <Center h={"100%"}>
-                    <Badge fontSize={"sm"}>Logout</Badge>
+                    <Text fontSize={"sm"}>Logout</Text>
                 </Center>
             </Box>
 
