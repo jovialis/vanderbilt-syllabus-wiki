@@ -3,7 +3,7 @@
  */
 import {LayoutComponent} from "../components/layout.component";
 import {
-    Badge,
+    Badge, Box,
     Button,
     Container,
     Flex,
@@ -182,77 +182,79 @@ export default function IndexPage() {
             </>}
 
             {(!initialState && !searchLoading && pageData.length > 0) && <>
-                <Table
-                    size={showTitle ? "md" : "sm"}
-                    colorScheme={"blackAlpha"}
-                    bg={"white"}
-                >
-                    <Thead>
-                        <Tr>
-                            {showTerm && <Th isNumeric>Term</Th>}
-                            {showTitle && <Th>Course</Th>}
-                            <Th isNumeric={false}>Section</Th>
-                            <Th isNumeric={false}>Professor</Th>
-                            <Th isNumeric>Syllabus</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {pageData.map(t => <>
+                <Box overflow={"scroll"}>
+                    <Table
+                        size={showTitle ? "md" : "sm"}
+                        colorScheme={"blackAlpha"}
+                        bg={"white"}
+                    >
+                        <Thead>
                             <Tr>
-                                <Th color={"gray.400"} whiteSpace={"nowrap"} isNumeric={showTerm}>{t.id}</Th>
-                                {showTitle && <Th/>}
-                                {showTerm && <Th/>}
-                                <Th/>
-                                <Th/>
+                                {showTerm && <Th isNumeric>Term</Th>}
+                                {showTitle && <Th>Course</Th>}
+                                <Th isNumeric={false}>Section</Th>
+                                <Th isNumeric={false}>Professor</Th>
+                                <Th isNumeric>Syllabus</Th>
                             </Tr>
-                            {t.courses.map(c => <>
-                                {c.sections.map((s => <>
-                                    <Tr>
-                                        {showTerm && <Td/>}
-                                        {showTitle && <Td><Text wordBreak={"break-word"}>{c.name}</Text></Td>}
-                                        <Td><Badge
-                                            whiteSpace={showTitle ? "nowrap" : undefined}>{s.abbreviationFull}</Badge></Td>
-                                        <Td>
-                                            {s.professors.map(p => {
-                                                const split = (p + ',').split(',');
-                                                return `${split[1].trim()} ${split[0].trim()}`
-                                            }).join(', ')}
-                                        </Td>
-                                        <Td isNumeric>{s.syllabi.length > 0 ? <>
-                                            <Link href={`/file/${s.syllabi[0].id}`} target={"_blank"}
-                                                  color={"orange.500"}>
-                                                {showTitle ? 'View Syllabus' : 'View'}
-                                                <ExternalLinkIcon ml={2}/>
-                                            </Link>
-                                        </> : <>
-                                            {user ? <>
-                                                <Button
-                                                    size={"xs"}
-                                                    leftIcon={<AttachmentIcon/>}
-                                                    onClick={() => {
-                                                        setAddSyllabusSection({
-                                                            ...s,
-                                                            term: t.id
-                                                        });
-                                                    }}
-                                                >
-                                                    {showTitle ? 'Upload Syllabus' : 'Upload'}
-                                                </Button>
+                        </Thead>
+                        <Tbody>
+                            {pageData.map(t => <>
+                                <Tr>
+                                    <Th color={"gray.400"} whiteSpace={"nowrap"} isNumeric={showTerm}>{t.id}</Th>
+                                    {showTitle && <Th/>}
+                                    {showTerm && <Th/>}
+                                    <Th/>
+                                    <Th/>
+                                </Tr>
+                                {t.courses.map(c => <>
+                                    {c.sections.map((s => <>
+                                        <Tr>
+                                            {showTerm && <Td/>}
+                                            {showTitle && <Td><Text wordBreak={"break-word"}>{c.name}</Text></Td>}
+                                            <Td><Badge
+                                                whiteSpace={"nowrap"}>{s.abbreviationFull}</Badge></Td>
+                                            <Td>
+                                                {s.professors.map(p => {
+                                                    const split = (p + ',').split(',');
+                                                    return `${split[1].trim()} ${split[0].trim()}`
+                                                }).join(', ')}
+                                            </Td>
+                                            <Td isNumeric>{s.syllabi.length > 0 ? <>
+                                                <Link href={`/file/${s.syllabi[0].id}`} target={"_blank"}
+                                                      color={"orange.500"}>
+                                                    {showTitle ? 'View Syllabus' : 'View'}
+                                                    <ExternalLinkIcon ml={2}/>
+                                                </Link>
                                             </> : <>
-                                                <Badge
-                                                    size={"xs"}
-                                                    leftIcon={<AttachmentIcon/>}
-                                                >
-                                                    {showTitle ? 'Not Available' : 'None'}
-                                                </Badge>
-                                            </>}
-                                        </>}</Td>
-                                    </Tr>
-                                </>))}
+                                                {user ? <>
+                                                    <Button
+                                                        size={"xs"}
+                                                        leftIcon={<AttachmentIcon/>}
+                                                        onClick={() => {
+                                                            setAddSyllabusSection({
+                                                                ...s,
+                                                                term: t.id
+                                                            });
+                                                        }}
+                                                    >
+                                                        {showTitle ? 'Upload Syllabus' : 'Upload'}
+                                                    </Button>
+                                                </> : <>
+                                                    <Badge
+                                                        size={"xs"}
+                                                        leftIcon={<AttachmentIcon/>}
+                                                    >
+                                                        {showTitle ? 'Not Available' : 'None'}
+                                                    </Badge>
+                                                </>}
+                                            </>}</Td>
+                                        </Tr>
+                                    </>))}
+                                </>)}
                             </>)}
-                        </>)}
-                    </Tbody>
-                </Table>
+                        </Tbody>
+                    </Table>
+                </Box>
                 <Flex justifyContent={"center"} mt={10}>
                     <Button
                         onClick={nextPage}

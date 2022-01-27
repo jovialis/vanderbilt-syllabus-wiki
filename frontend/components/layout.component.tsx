@@ -26,7 +26,7 @@ export function LayoutComponent(props: LayoutComponentProps) {
             <meta name="language" content="English"/>
             <meta name="author" content="Dylan Hanson (jovialis)"/>
         </Head>
-        <VStack minH={"100vh"} alignItems={"stretch"} spacing={0}>
+        <VStack minH={"100vh"} alignItems={"stretch"} spacing={0} overflow={"hidden"}>
             <Box flexGrow={0} py={10} pt={[5, 10]} bg={"orange"}>
                 <Container maxW={"container.xl"}>
                     <Stack spacing={[6, 0]} justifyContent={"space-between"}
