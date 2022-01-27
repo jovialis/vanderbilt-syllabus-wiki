@@ -238,7 +238,7 @@ import MongoStore from "connect-mongo";
                     console.log('Deleted ' + fileKey)
                     return next(new Error('Invalid Section submitted.'));
                 }
-                
+
                 // Create a Syllabus
                 const syllabus = await SyllabusModel.create({
                     _id: req.uploadID,

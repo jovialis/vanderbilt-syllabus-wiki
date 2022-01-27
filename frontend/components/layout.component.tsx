@@ -10,7 +10,7 @@ import {
     Flex,
     Heading,
     HStack,
-    Link,
+    Link, Stack,
     Text,
     useBreakpointValue,
     VStack
@@ -28,23 +28,25 @@ export interface LayoutComponentProps {
 export function LayoutComponent(props: LayoutComponentProps) {
     const footerSpacing = useBreakpointValue({base: 5, md: 10});
 
+    const stackTitle = useBreakpointValue({base: true, md: false});
+
     return <>
         <VStack minH={"100vh"} alignItems={"stretch"} spacing={0}>
-            <Box flexGrow={0} py={10} bg={"orange"}>
+            <Box flexGrow={0} py={10} pt={stackTitle ? 5 : 10} bg={"orange"}>
                 <Container maxW={"container.xl"}>
-                    <HStack justifyContent={"space-between"}>
-                        <VStack alignItems={"flex-start"}>
+                    <Stack spacing={stackTitle ? 3 : 0} justifyContent={"space-between"} direction={stackTitle ? ["column"]: ["row"]}>
+                        <Stack alignItems={stackTitle ? "center" : "flex-start"} direction={stackTitle ? "row" : "column"}>
                             <Heading size={"lg"}>
                                 Syllabus Wiki
                             </Heading>
                             <Code variant={"outline"} colorScheme={"blackAlpha"} color={"black"}>
                                 Vanderbilt University
                             </Code>
-                        </VStack>
-                        <HStack>
+                        </Stack>
+                        <Box>
                             <LoginButton updateUser={props.updateUser}/>
-                        </HStack>
-                    </HStack>
+                        </Box>
+                    </Stack>
                 </Container>
                 {props.marginElement && <>
                     <Container maxW={"container.xl"}>

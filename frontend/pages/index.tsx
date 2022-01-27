@@ -183,7 +183,7 @@ export default function IndexPage() {
 
             {(!initialState && !searchLoading && pageData.length > 0) && <>
                 <Table
-                    variant='simple'
+                    size={showTitle ? "md" : "sm"}
                     colorScheme={"blackAlpha"}
                     bg={"white"}
                 >
