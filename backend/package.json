@@ -24,7 +24,8 @@
     "mongoose": "^6.1.7",
     "multer": "^1.4.4",
     "multer-s3": "^2.10.0",
-    "nanoid": "^3.2.0"
+    "nanoid": "^3.2.0",
+    "shared": "^0.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

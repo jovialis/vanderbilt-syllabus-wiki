@@ -2,10 +2,13 @@
  * Created by jovialis (Dylan Hanson) on 1/26/22.
  */
 
-import {Box, Code, Container, Flex, Heading, HStack, Link, Stack, Text, VStack} from "@chakra-ui/react";
+import {Box, Code, Container, Flex, Heading, HStack, Link, Stack, Text, VStack, Badge} from "@chakra-ui/react";
 import {ExportUser, LoginButton} from "./loginButton.component";
 import {Dispatch} from "react";
 import Head from "next/head.js";
+import Github from "../assets/github.svg";
+import Vercel from "../assets/vercel.svg";
+import {Icon} from "@chakra-ui/icons";
 
 export interface LayoutComponentProps {
     marginElement?: JSX.Element,
@@ -38,14 +41,14 @@ export function LayoutComponent(props: LayoutComponentProps) {
                                     textDecoration: "none"
                                 }
                             }}>
-                                <Heading size={"lg"}>
+                                <Heading as={"h1"} size={"xl"}>
                                     Syllabus Wiki
                                 </Heading>
                             </Link>
 
-                            <Code variant={"outline"} colorScheme={"blackAlpha"} color={"black"}>
+                            <Badge variant={"outline"} colorScheme={"blackAlpha"} color={"black"}>
                                 Vanderbilt University
-                            </Code>
+                            </Badge>
                         </Stack>
                         <Box>
                             <LoginButton updateUser={props.updateUser}/>
@@ -67,24 +70,55 @@ export function LayoutComponent(props: LayoutComponentProps) {
                     {props.children}
                 </Box>
             </Box>
-            <Box flexGrow={0} bg={"gray.100"} py={8} pb={10}>
-                <Container maxW={"container.xl"} flexGrow={0}>
-                    <HStack alignItems={"center"} justifyContent={"space-between"}>
-                        <VStack alignItems={"flex-start"}>
-                            <Heading size={"md"}>
-                                Syllabus Wiki
-                            </Heading>
-                            <Text color={"gray.500"}>
-                                Created with {`<3`} by Dylan Hanson
-                            </Text>
-                        </VStack>
-                        <HStack spacing={[5, 10]}>
-                            <Link href={"https://github.com/jovialis/vanderbilt-syllabus-wiki"}>
-                                View on GitHub
-                            </Link>
-                        </HStack>
-                    </HStack>
-
+            <Box flexGrow={0} bg={"gray.100"} py={5} pt={8}>
+                <Container maxW={"container.lg"} flexGrow={0}>
+                    <VStack spacing={5} alignItems={"stretch"}>
+                        <Stack direction={["column", "row"]} alignItems={["flex-start", "center"]} justifyContent={"space-between"} spacing={[5, 0]}>
+                            <VStack alignItems={"flex-start"}>
+                                <Heading size={"md"}>
+                                    Syllabus Wiki
+                                </Heading>
+                                <Badge color={"gray.500"} bg={"clear"} p={0}>
+                                    Created with {`<3`} at Vanderbilt University
+                                </Badge>
+                            </VStack>
+                            <Stack spacing={5} alignItems={"center"} direction={["row", "row-reverse"]}>
+                                <Link
+                                    href={"https://github.com/jovialis/vanderbilt-syllabus-wiki"}
+                                    target={"_blank"}
+                                    sx={{
+                                        "& svg": {
+                                            transition: "0.2s fill"
+                                        },
+                                        "&:hover svg": {
+                                            fill: "gray.600"
+                                        }
+                                    }}
+                                >
+                                    <Icon
+                                        fill={"gray.500"}
+                                        as={Github}
+                                        h={25}
+                                        w={"auto"}
+                                    />
+                                </Link>
+                                <Link href={"https://vercel.com/"}
+                                    target={"_blank"}
+                                    sx={{
+                                        "& svg": {
+                                            transition: "0.2s fill"
+                                        },
+                                        "&:hover svg": {
+                                            fill: "gray.600"
+                                        }
+                                    }}
+                                >
+                                    <Icon fill={"gray.500"} h={15} w={"auto"} as={Vercel}/>
+                                </Link>
+                            </Stack>
+                        </Stack>
+                        <Text fontSize={"xs"} color={"gray.400"} textAlign={["start", "center"]}>Copyright {(new Date()).getFullYear()}, Dylan Hanson</Text>
+                    </VStack>
                 </Container>
             </Box>
         </VStack>

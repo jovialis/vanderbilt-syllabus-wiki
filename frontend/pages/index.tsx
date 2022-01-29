@@ -28,10 +28,11 @@ import {useRouter} from "next/router.js";
 import {useEffect, useState} from "react";
 import {useFetch} from "../utils/useFetch.util";
 import {AxiosRequestConfig} from "axios";
-import {SearchSectionTerm} from "../types/section.type";
 import Trekking from "../assets/trekking.svg";
 import Vacation from "../assets/vacation.svg";
-import {ExportUser} from "../components/loginButton.component.js";
+import {ExportUser} from "../components/loginButton.component";
+import {combineSearchResults} from "../helpers/combineSearchResults";
+import {APISearchResponse, APITerm} from "shared";
 
 export default function IndexPage() {
     const router = useRouter();
@@ -49,15 +50,17 @@ export default function IndexPage() {
      */
     const [initialState, setInitialState] = useState<boolean>(true);
     const [curPage, setCurPage] = useState<number>(1);
-    const [pageData, setPageData] = useState<SearchSectionTerm[]>([]);
+    const [hasNextPage, setHasNextPage] = useState<boolean>(false);
+    const [pageData, setPageData] = useState<APITerm[]>([]);
 
     /**
      * Data fetching
      */
     const [curSearchRequest, setCurSearchRequest] = useState<AxiosRequestConfig | undefined>(undefined);
-    const {loading: searchLoading, data: searchFetchData} = useFetch<{ terms: SearchSectionTerm[] }>(curSearchRequest, {
-        onData: (data: { terms: SearchSectionTerm[] }) => {
-            setPageData(data.terms);
+    const {loading: searchLoading, data: searchFetchData} = useFetch<APISearchResponse>(curSearchRequest, {
+        onData: (data: APISearchResponse) => {
+            setPageData(data.data);
+            setHasNextPage(data.pagination.hasNext);
         },
         onError: (error: Error) => {
             console.log(error);
@@ -68,13 +71,12 @@ export default function IndexPage() {
     const {
         loading: paginateLoading,
         data: paginateFetchData
-    } = useFetch<{ terms: SearchSectionTerm[] }>(curPaginateRequest, {
-        onData: (data: { terms: SearchSectionTerm[] }) => {
-            setPageData([
-                ...pageData,
-                ...data.terms
-            ]);
+    } = useFetch<APISearchResponse>(curPaginateRequest, {
+        onData: (data: APISearchResponse) => {
+            const combinedData: APITerm[] = combineSearchResults(pageData, data.data);
+            setPageData(combinedData);
             setCurPage(curPage + 1);
+            setHasNextPage(data.pagination.hasNext);
         },
         onError: (error: Error) => {
             console.log(error);
@@ -190,7 +192,7 @@ export default function IndexPage() {
                     >
                         <Thead>
                             <Tr>
-                                {showTerm && <Th isNumeric>Term</Th>}
+                                {showTerm && <Th>Term</Th>}
                                 <Th>Course</Th>
                                 <Th isNumeric={false}>Section</Th>
                                 <Th isNumeric={false}>Professor</Th>
@@ -199,8 +201,8 @@ export default function IndexPage() {
                         </Thead>
                         <Tbody>
                             {pageData.map(t => <>
-                                <Tr>
-                                    <Th color={"gray.400"} whiteSpace={"nowrap"} isNumeric={showTerm}>{t.id}</Th>
+                                <Tr pos={"sticky"}>
+                                    <Th color={"gray.400"} whiteSpace={"nowrap"}>{t.id}</Th>
                                     <Th/>
                                     {showTerm && <Th/>}
                                     <Th/>
@@ -255,16 +257,18 @@ export default function IndexPage() {
                         </Tbody>
                     </Table>
                 </Box>
-                <Flex justifyContent={"center"} mt={10}>
-                    <Button
-                        onClick={nextPage}
-                        isLoading={paginateLoading}
-                        loadingText={'Loading...'}
-                        colorScheme={"orange"}
-                    >
-                        Load More
-                    </Button>
-                </Flex>
+                {hasNextPage && <>
+                    <Flex justifyContent={"center"} mt={10}>
+                        <Button
+                            onClick={nextPage}
+                            isLoading={paginateLoading}
+                            loadingText={'Loading...'}
+                            colorScheme={"orange"}
+                        >
+                            Load More
+                        </Button>
+                    </Flex>
+                </>}
             </>}
 
 

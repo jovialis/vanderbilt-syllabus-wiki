@@ -12,3 +12,14 @@ export function paginate<T>(array: T[], curPage: number = 1): T[] {
     const end = (curPage) * DEFAULT_PER_PAGE;
     return array.slice(start, end);
 }
+
+export function hasNext(array: any[], curPage: number): boolean {
+    if (curPage < 1 || !curPage)
+        curPage = 1;
+
+    // 20 * 1 = 20
+    // slice 0..19 gets the first 20 results
+
+    const sliceEnd = (curPage) * DEFAULT_PER_PAGE;
+    return sliceEnd < array.length;
+}

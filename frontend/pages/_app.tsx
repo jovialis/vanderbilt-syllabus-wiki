@@ -1,4 +1,6 @@
 import '../styles/globals.css'
+import "@fontsource/cormorant-garamond";
+
 import type {AppProps} from 'next/app'
 
 import {ChakraProvider} from "@chakra-ui/react";

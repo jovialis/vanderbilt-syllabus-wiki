@@ -4,35 +4,14 @@
 
 import modelSection from "../models/section.model.js";
 import {SectionID} from "@vanderbilt/yes-api";
-import {paginate} from "./paginate.helper.js";
+import {hasNext, paginate} from "./paginate.helper.js";
+// import {BlankAPISearchResponse} from "shared";
+import {APICourse, APISearchResponse, APITerm, BlankAPISearchResponse} from "shared";
 
-export interface SearchSectionSyllabus {
-    id: string
-    location: string
-}
-
-export interface SearchSection {
-    id: string,
-    abbreviationFull: string,
-    professors: string[],
-    syllabi: SearchSectionSyllabus[]
-}
-
-export interface SearchSectionCourse {
-    name: string
-    abbreviation: string
-    sections: SearchSection[]
-}
-
-export interface SearchSectionTerm {
-    id: string,
-    courses: SearchSectionCourse[]
-}
-
-export async function searchSections(term: string, curPage: number = 0): Promise<SearchSectionTerm[]> {
+export async function searchSections(term: string, curPage: number = 0): Promise<APISearchResponse> {
     const SectionModel = modelSection();
 
-    let results: {
+    let aggrResults: {
         id: SectionID,
         term: string,
         abbreviation: string,
@@ -130,15 +109,16 @@ export async function searchSections(term: string, curPage: number = 0): Promise
     );
 
     // Paginate the results before processing.
-    results = paginate(results, curPage);
+    const results = paginate(aggrResults, curPage);
 
-    if (results.length === 0)
-        return [];
+    if (results.length === 0) {
+        return BlankAPISearchResponse;
+    }
 
-    let allResults: SearchSectionTerm[] = [];
+    let allResults: APITerm[] = [];
 
-    let curTerm: SearchSectionTerm = null;
-    let curCourse: SearchSectionCourse = null;
+    let curTerm: APITerm = null;
+    let curCourse: APICourse = null;
 
     // Group by term then by
     for (const section of results) {
@@ -196,202 +176,11 @@ export async function searchSections(term: string, curPage: number = 0): Promise
     curTerm.courses.push(curCourse);
     allResults.push(curTerm);
 
-    return allResults;
+    return {
+        data: allResults,
+        pagination: {
+            page: curPage,
+            hasNext: hasNext(aggrResults, curPage)
+        }
+    };
 }
-
-/**
- * [
- *     {
- *         "id": "0980_4616",
- *         "term": "2022 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-01",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Fisher, Douglas H."
- *         ],
- *         "syllabi": [
- *             {
- *                 "id": "QkaLB3YNz140wBdVoOd7W",
- *                 "location": "https://syllabus-wiki-uploads.s3.amazonaws.com/public/QkaLB3YNz140wBdVoOd7W"
- *             }
- *         ]
- *     },
- *     {
- *         "id": "0980_4725",
- *         "term": "2022 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-02",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0980_4945",
- *         "term": "2022 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-03",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0980_5161",
- *         "term": "2022 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-04",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Hajiamini, Shervin"
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0975_4092",
- *         "term": "2021 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-01",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0975_4406",
- *         "term": "2021 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-02",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0975_4654",
- *         "term": "2021 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-03",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Hajiamini, Shervin"
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0975_4870",
- *         "term": "2021 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-04",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Hajiamini, Shervin"
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0960_4253",
- *         "term": "2021 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-01",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Fisher, Douglas H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0960_4372",
- *         "term": "2021 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-02",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0960_4603",
- *         "term": "2021 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-03",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0960_4868",
- *         "term": "2021 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-04",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0960_10619",
- *         "term": "2021 Spring",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-05",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Hasan, Md Kamrul"
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0955_3990",
- *         "term": "2020 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-01",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0955_4334",
- *         "term": "2020 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-02",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0955_4636",
- *         "term": "2020 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-03",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Fisher, Douglas H."
- *         ],
- *         "syllabi": []
- *     },
- *     {
- *         "id": "0955_4870",
- *         "term": "2020 Fall",
- *         "abbreviation": "CS 2201",
- *         "abbreviationFull": "CS 2201-04",
- *         "course": "Program Design and Data Structures",
- *         "professors": [
- *             "Roth, Gerald H."
- *         ],
- *         "syllabi": []
- *     }
- * ]
- */

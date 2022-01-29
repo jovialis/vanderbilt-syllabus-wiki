@@ -16,6 +16,8 @@ import {google} from "googleapis";
 import modelUser from "./models/user.model.js";
 import MongoStore from "connect-mongo";
 
+import {APISearchResponse, BlankAPISearchResponse} from "shared";
+
 // Start the Express server
 (async function () {
 
@@ -56,10 +58,10 @@ import MongoStore from "connect-mongo";
             const curPage: number = Number.parseInt(<string>req.query["page"]);
 
             if (query.length === 0) {
-                return res.json({terms: []});
+                return res.json(BlankAPISearchResponse);
             } else {
-                const results = await searchSections(query, curPage);
-                return res.json({terms: results})
+                const response: APISearchResponse = await searchSections(query, curPage);
+                return res.json(response)
             }
         });
     });
@@ -171,7 +173,7 @@ import MongoStore from "connect-mongo";
         const SectionModel = modelSection();
         const SyllabusModel = modelSyllabus();
 
-        const S3_BUCKET = 'syllabus-wiki-uploads';
+        const S3_BUCKET = process.env['S3_BUCKET'];
 
         const s3 = new pkg.S3({
             accessKeyId: process.env['S3_KEY'],
