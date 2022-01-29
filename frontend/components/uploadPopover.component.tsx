@@ -30,14 +30,14 @@ import {
     useDisclosure,
     VStack
 } from "@chakra-ui/react";
-import {SearchSection} from "../helpers/combineSearchResults.js";
 import {AttachmentIcon} from "@chakra-ui/icons";
 import {ChangeEvent, Dispatch, useEffect, useRef, useState} from "react";
 import {AxiosRequestConfig} from "axios";
 import {useRouter} from "next/router.js";
 import {useFetch} from "../utils/useFetch.util";
+import {APISection} from "shared";
 
-export interface SearchSectionWithTerm extends SearchSection {
+export interface SearchSectionWithTerm extends APISection {
     term: string
 }
 
