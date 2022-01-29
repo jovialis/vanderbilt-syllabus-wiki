@@ -5,9 +5,17 @@
   "author": "Dylan Hanson (jovialis)",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "yarn workspaces foreach run build",
+    "start": "yarn workspace backend start"
+  },
   "workspaces": [
     "backend",
     "frontend",
     "shared"
-  ]
+  ],
+  "devDependencies": {
+    "yarn": "^1.22.17"
+  },
+  "packageManager": "yarn@3.1.1"
 }
