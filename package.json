@@ -10,9 +10,9 @@
     "start": "yarn workspace backend start"
   },
   "workspaces": [
+    "shared",
     "backend",
-    "frontend",
-    "shared"
+    "frontend"
   ],
   "packageManager": "yarn@3.1.1"
 }
