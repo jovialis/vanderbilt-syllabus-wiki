@@ -2,6 +2,7 @@
 
 #### A free, open source repository for syllabus crowd sourcing at Vanderbilt University.
 
+Created by Dylan Hanson ([charles.d.hanson@vanderbilt.edu](mailto:charles.d.hanson@vanderbilt.edu))
 
 ---
 
@@ -47,3 +48,6 @@ It would be possible to combine the API into Vercel using its edge computing net
 | NEXT_PUBLIC_BACKEND_URL | Base URL for the backend API                                                                     |
 | S3_BUCKET               | S3 bucket URL and path where syllabi can be accessed. THIS IS NOT THE SAME AS BACKEND:S3_BUCKET! |
 | BUILD_TARGET            | Must be set to 'frontend' in order to properly build.                                            |
+
+## Acknowledgements
+Special thanks to @rothso and his [Syllabank project](https://syllabank.com/) at UNF for inspiring Vanderbilt Syllabus Wiki. He's doing cool stuff!
