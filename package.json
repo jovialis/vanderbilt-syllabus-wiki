@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "echo 'Building SHARED' && yarn workspace shared build && echo 'Building BACKEND' && yarn workspace backend run build && echo 'Building FRONTEND' && yarn workspace frontend run build"
+    "build": "chmod ug+x ./bin/build.sh && ./bin/build.sh"
   },
   "workspaces": [
     "shared",
