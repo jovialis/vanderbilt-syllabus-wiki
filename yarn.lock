@@ -2082,7 +2082,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chakra-ui/system@npm:1.10.1, @chakra-ui/system@npm:^1.10.1":
+"@chakra-ui/system@npm:*, @chakra-ui/system@npm:1.10.1, @chakra-ui/system@npm:^1.10.1":
   version: 1.10.1
   resolution: "@chakra-ui/system@npm:1.10.1"
   dependencies:
@@ -2358,7 +2358,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:^11":
+"@emotion/react@npm:*, @emotion/react@npm:^11.7.1":
   version: 11.7.1
   resolution: "@emotion/react@npm:11.7.1"
   dependencies:
@@ -2401,7 +2401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/styled@npm:^11":
+"@emotion/styled@npm:*, @emotion/styled@npm:^11.6.0":
   version: 11.6.0
   resolution: "@emotion/styled@npm:11.6.0"
   dependencies:
@@ -3184,16 +3184,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-infinite-scroller@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "@types/react-infinite-scroller@npm:1.2.2"
-  dependencies:
-    "@types/react": "*"
-  checksum: 19ffc80fa3887b09fd6a889797c3d52c14cbec33142b5e17b25c8f258ad6f6bc8ecef7d4492b18b2bf84784cddfe2baa85fd805514c038dab234f73e29f8c36f
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:*, @types/react@npm:17.0.38, @types/react@npm:^17.0.15":
+"@types/react@npm:17.0.38, @types/react@npm:^17.0.15":
   version: 17.0.38
   resolution: "@types/react@npm:17.0.38"
   dependencies:
@@ -4351,13 +4342,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debounce@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "debounce@npm:1.2.1"
-  checksum: 682a89506d9e54fb109526f4da255c5546102fbb8e3ae75eef3b04effaf5d4853756aee97475cd4650641869794e44f410eeb20ace2b18ea592287ab2038519e
-  languageName: node
-  linkType: hard
-
 "debug@npm:2.6.9, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -5214,32 +5198,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^5":
-  version: 5.6.0
-  resolution: "framer-motion@npm:5.6.0"
+"framer-motion@npm:*, framer-motion@npm:^6.2.3":
+  version: 6.2.3
+  resolution: "framer-motion@npm:6.2.3"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     framesync: 6.0.1
     hey-listen: ^1.0.8
     popmotion: 11.0.3
-    react-merge-refs: ^1.1.0
-    react-use-measure: ^2.1.1
     style-value-types: 5.0.0
     tslib: ^2.1.0
   peerDependencies:
-    "@react-three/fiber": "*"
     react: ">=16.8 || ^17.0.0"
     react-dom: ">=16.8 || ^17.0.0"
-    three: ^0.135.0
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  peerDependenciesMeta:
-    "@react-three/fiber":
-      optional: true
-    three:
-      optional: true
-  checksum: 384374bebda443ea2a149951337c4f82b9c3611e138e8dd8db6439bbccc4523968deb72dde83d5686223ec78be58f8ae1f51b9e34b585e4c50df15266e586a60
+  checksum: ad4b40ca7419e51e743fa91371480b8e404e4a8673c4c1db11a323665a1040777c90a92087292a5702326e452e9d56ad3a77b40ba4d69021eb0e89db29f9e569
   languageName: node
   linkType: hard
 
@@ -5275,24 +5250,21 @@ __metadata:
     "@chakra-ui/icons": ^1.1.1
     "@chakra-ui/react": ^1.7.4
     "@chakra-ui/system": ^1.10.1
-    "@emotion/react": ^11
-    "@emotion/styled": ^11
+    "@emotion/react": ^11.7.1
+    "@emotion/styled": ^11.6.0
     "@fontsource/cormorant-garamond": ^4.5.1
     "@svgr/webpack": ^6.2.0
     "@types/node": 17.0.10
     "@types/react": 17.0.38
-    "@types/react-infinite-scroller": ^1.2.2
     axios: ^0.25.0
     eslint: 8.7.0
     eslint-config-next: 12.0.8
-    framer-motion: ^5
+    framer-motion: ^6.2.3
     next: ^12.0.9
     node-fetch: ^3.2.0
     react: 17.0.2
     react-dom: 17.0.2
-    react-google-one-tap-login: ^0.1.1
     react-hook-form: ^7.25.0
-    react-infinite-scroller: ^1.2.4
     react-table: ^7.7.0
     shared: ^0.0.0
     typescript: 4.5.5
@@ -6175,7 +6147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.mergewith@npm:4.6.2":
+"lodash.mergewith@npm:4.6.2, lodash.mergewith@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.mergewith@npm:4.6.2"
   checksum: a6db2a9339752411f21b956908c404ec1e088e783a65c8b29e30ae5b3b6384f82517662d6f425cc97c2070b546cc2c7daaa8d33f78db7b6e9be06cd834abdeb8
@@ -6928,7 +6900,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.5.8, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -7090,15 +7062,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-google-one-tap-login@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "react-google-one-tap-login@npm:0.1.1"
-  peerDependencies:
-    react: ">= 16.8.0"
-  checksum: 066cdb9501b62912e1467013a7ff7cf9191fffb75c4551bad2f2612c5cf321a6a8ebfaff4f22d86ad27f08d3018412fc6a3d9e25e6dd6b39ead5f9efdc4e00d5
-  languageName: node
-  linkType: hard
-
 "react-hook-form@npm:^7.25.0":
   version: 7.25.3
   resolution: "react-hook-form@npm:7.25.3"
@@ -7108,28 +7071,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-infinite-scroller@npm:^1.2.4":
-  version: 1.2.4
-  resolution: "react-infinite-scroller@npm:1.2.4"
-  dependencies:
-    prop-types: ^15.5.8
-  peerDependencies:
-    react: ^0.14.9 || ^15.3.0 || ^16.0.0
-  checksum: 6021df5b0318c6f54c3e9adc830f923232b0ed35082d3abf3761b1f298041b42cfecc9a874489dbcbbe6fe8b5256c120b86123bf602061e3f8a1784bccadcf70
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^16.13.1, react-is@npm:^16.7.0":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
-  languageName: node
-  linkType: hard
-
-"react-merge-refs@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "react-merge-refs@npm:1.1.0"
-  checksum: 90884352999002d868ab9f1bcfe3222fb0f2178ed629f1da7e98e5a9b02a2c96b4aa72800db92aabd69d2483211b4be57a2088e89a11a0b660e7ada744d4ddf7
   languageName: node
   linkType: hard
 
@@ -7191,18 +7136,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.3 || ^17.0.0-0
   checksum: a679edecc76d3e51311b095528395b38ac85a1ffa371716bea01559a5fdc75af9a6abb9bb907c63190c8e77da22b11f7b05065b3a45d190d8f43cb83e4366206
-  languageName: node
-  linkType: hard
-
-"react-use-measure@npm:^2.1.1":
-  version: 2.1.1
-  resolution: "react-use-measure@npm:2.1.1"
-  dependencies:
-    debounce: ^1.2.1
-  peerDependencies:
-    react: ">=16.13"
-    react-dom: ">=16.13"
-  checksum: b8e8939229d463c3c505f7b617925c0228efae0cd6f651371f463846417b06c9170be57df51293a61027c41770f8a090fdb8a08717c4e36290ccb496e0318f1f
   languageName: node
   linkType: hard
 
