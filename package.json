@@ -9,9 +9,9 @@
     "build": "chmod ug+x ./bin/build.sh && ./bin/build.sh"
   },
   "workspaces": [
-    "shared",
-    "backend",
-    "frontend"
+    "src/shared",
+    "src/backend",
+    "src/frontend"
   ],
   "packageManager": "yarn@3.1.1"
 }
