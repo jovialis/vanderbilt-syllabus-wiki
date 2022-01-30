@@ -21,6 +21,7 @@
     "express-server-boilerplate": "^0.0.7",
     "express-session": "^1.17.2",
     "googleapis": "^92.0.0",
+    "mongodb": "^4.3.1",
     "mongoose": "^6.1.7",
     "multer": "^1.4.4",
     "multer-s3": "^2.10.0",
