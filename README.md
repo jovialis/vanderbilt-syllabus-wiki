@@ -38,6 +38,7 @@ It would be possible to combine the API into Vercel using its edge computing net
 | SESSION_SECRET       | Secret to use for securing browser session cookies                    |
 | PORT                 | Port to open backend on. Should be auto-set by host                   |
 | NODE_ENV             | Should be set to 'production' for deployment                          |
+| BUILD_TARGET         | Must be set to 'backend' in order to properly build.                  |
 
 #### Frontend
 
@@ -45,3 +46,4 @@ It would be possible to combine the API into Vercel using its edge computing net
 |-------------------------|--------------------------------------------------------------------------------------------------|
 | NEXT_PUBLIC_BACKEND_URL | Base URL for the backend API                                                                     |
 | S3_BUCKET               | S3 bucket URL and path where syllabi can be accessed. THIS IS NOT THE SAME AS BACKEND:S3_BUCKET! |
+| BUILD_TARGET            | Must be set to 'frontend' in order to properly build.                                            |
