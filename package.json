@@ -6,8 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "yarn workspace shared build && yarn workspaces foreach run build",
-    "start": "yarn workspace backend start"
+    "build": "echo 'Building SHARED' && yarn workspace shared build && echo 'Building BACKEND' && yarn workspace backend run build && echo 'Building FRONTEND' && yarn workspace frontend run build"
   },
   "workspaces": [
     "shared",
