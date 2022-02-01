@@ -3,7 +3,8 @@
  */
 import {LayoutComponent} from "../components/layout.component";
 import {
-    Badge, Box,
+    Badge,
+    Box,
     Button,
     Container,
     Flex,

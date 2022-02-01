@@ -2,7 +2,7 @@
  * Created by jovialis (Dylan Hanson) on 1/26/22.
  */
 
-import {Box, Code, Container, Flex, Heading, HStack, Link, Stack, Text, VStack, Badge} from "@chakra-ui/react";
+import {Badge, Box, Container, Flex, Heading, Link, Stack, Text, VStack} from "@chakra-ui/react";
 import {ExportUser, LoginButton} from "./loginButton.component";
 import {Dispatch} from "react";
 import Head from "next/head.js";
@@ -73,7 +73,8 @@ export function LayoutComponent(props: LayoutComponentProps) {
             <Box flexGrow={0} bg={"gray.100"} py={5} pt={8}>
                 <Container maxW={"container.lg"} flexGrow={0}>
                     <VStack spacing={5} alignItems={"stretch"}>
-                        <Stack direction={["column", "row"]} alignItems={["flex-start", "center"]} justifyContent={"space-between"} spacing={[5, 0]}>
+                        <Stack direction={["column", "row"]} alignItems={["flex-start", "center"]}
+                               justifyContent={"space-between"} spacing={[5, 0]}>
                             <VStack alignItems={"flex-start"}>
                                 <Heading size={"md"}>
                                     Syllabus Wiki
@@ -103,21 +104,23 @@ export function LayoutComponent(props: LayoutComponentProps) {
                                     />
                                 </Link>
                                 <Link href={"https://vercel.com/"}
-                                    target={"_blank"}
-                                    sx={{
-                                        "& svg": {
-                                            transition: "0.2s fill"
-                                        },
-                                        "&:hover svg": {
-                                            fill: "gray.600"
-                                        }
-                                    }}
+                                      target={"_blank"}
+                                      sx={{
+                                          "& svg": {
+                                              transition: "0.2s fill"
+                                          },
+                                          "&:hover svg": {
+                                              fill: "gray.600"
+                                          }
+                                      }}
                                 >
                                     <Icon fill={"gray.500"} h={15} w={"auto"} as={Vercel}/>
                                 </Link>
                             </Stack>
                         </Stack>
-                        <Text fontSize={"xs"} color={"gray.400"} textAlign={["start", "center"]}>Copyright {(new Date()).getFullYear()}, Dylan Hanson</Text>
+                        <Text fontSize={"xs"} color={"gray.400"}
+                              textAlign={["start", "center"]}>Copyright {(new Date()).getFullYear()}, Dylan
+                            Hanson</Text>
                     </VStack>
                 </Container>
             </Box>

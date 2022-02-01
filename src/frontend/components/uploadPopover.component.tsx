@@ -28,6 +28,7 @@ import {
     Thead,
     Tr,
     useDisclosure,
+    VisuallyHiddenInput,
     VStack
 } from "@chakra-ui/react";
 import {AttachmentIcon} from "@chakra-ui/icons";
@@ -188,7 +189,7 @@ export function UploadPopoverComponent(props: UploadPopoverComponentProps) {
                                 </Text>
                             </VStack>
                         </Button>
-                        <input
+                        <VisuallyHiddenInput
                             type="file"
                             accept={"application/pdf"}
                             ref={hiddenFileInput}

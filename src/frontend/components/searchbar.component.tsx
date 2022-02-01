@@ -4,7 +4,7 @@
 
 import {Box, Button, HStack, Input, InputGroup, InputLeftElement} from "@chakra-ui/react";
 import {SearchIcon} from "@chakra-ui/icons";
-import {Dispatch, useState} from "react";
+import {Dispatch, useEffect, useState} from "react";
 
 export interface SearchbarComponentProps {
     value: string
@@ -15,6 +15,22 @@ export interface SearchbarComponentProps {
 export function SearchbarComponent(props: SearchbarComponentProps) {
     const placeholders = ["Global History of Waste", "CS 2201", "Biology Today", "HIST 2139"];
     const [placeholderIndex, setPlaceholderIndex] = useState<number>(Math.floor(Math.random() * placeholders.length));
+    const [transitioning, setTransitioning] = useState<boolean>(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setTransitioning(true);
+        }, 2000);
+    }, [placeholderIndex]);
+
+    useEffect(() => {
+        if (transitioning) {
+            setTimeout(() => {
+                setTransitioning(false);
+                setPlaceholderIndex((placeholderIndex + 1) % placeholders.length)
+            }, 250);
+        }
+    }, [transitioning]);
 
     return <>
         <HStack spacing={3} align={"center"}>
@@ -24,6 +40,7 @@ export function SearchbarComponent(props: SearchbarComponentProps) {
                         <SearchIcon color='gray.300'/>
                     </InputLeftElement>
                     <Input
+                        className={transitioning ? "transitioning" : undefined}
                         bg={"white"}
                         boxShadow={"md"}
                         value={props.value}
@@ -32,6 +49,15 @@ export function SearchbarComponent(props: SearchbarComponentProps) {
                         onKeyDown={e => {
                             if (e.key === 'Enter') {
                                 props.onSearch(props.value);
+                            }
+                        }}
+                        sx={{
+                            "&.transitioning::placeholder": {
+                                opacity: 0
+                            },
+                            "&::placeholder": {
+                                opacity: 1,
+                                transition: "0.3s opacity"
                             }
                         }}
                     />

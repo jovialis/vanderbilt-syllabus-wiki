@@ -7,21 +7,28 @@ Created by Dylan Hanson ([charles.d.hanson@vanderbilt.edu](mailto:charles.d.hans
 ---
 
 ## Components
+
 The package is organized into a single monorepo using Yarn workspaces.
 
 ### Frontend
+
 Built in React and Next.JS with Chakra UI used as the design framework.
 
 ### Backend
-MERT stack, built using TypeScript. Super simple; all routes slapped into a single location. Backend dataset leverages the @vanderbilt/yes-api package.
+
+MERT stack, built using TypeScript. Super simple; all routes slapped into a single location. Backend dataset leverages
+the @vanderbilt/yes-api package.
 
 ### Shared
+
 Common TypeScript schemas for API reference across the frontend and backend.
 
 ## Running
+
 Syllabus Wiki is currently hosted across two services. Heroku hosts the API backend while Vercel hosts the frontend.
 
-It would be possible to combine the API into Vercel using its edge computing network, but I kept the two separate to enable batch scheduling of YES scraping jobs.
+It would be possible to combine the API into Vercel using its edge computing network, but I kept the two separate to
+enable batch scheduling of YES scraping jobs.
 
 ### Environmental Variables
 
@@ -50,4 +57,6 @@ It would be possible to combine the API into Vercel using its edge computing net
 | BUILD_TARGET            | Must be set to 'frontend' in order to properly build.                                            |
 
 ## Acknowledgements
-Special thanks to @rothso and his [Syllabank project](https://syllabank.com/) at UNF for inspiring Vanderbilt Syllabus Wiki. He's doing cool stuff!
+
+Special thanks to @rothso and his [Syllabank project](https://syllabank.com/) at UNF for inspiring Vanderbilt Syllabus
+Wiki. He's doing cool stuff!

@@ -2,7 +2,7 @@
  * Created by jovialis (Dylan Hanson) on 1/27/22.
  */
 
-import {Avatar, Box, Button, Center, HStack, Text, Badge} from "@chakra-ui/react";
+import {Avatar, Box, Button, Center, HStack, Text} from "@chakra-ui/react";
 import Google from "../assets/google.svg";
 import {Dispatch, useEffect, useState} from "react";
 import {createAxios} from "../utils/axios.util";
